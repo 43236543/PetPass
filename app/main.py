@@ -2,7 +2,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from starlette.middleware.sessions import SessionMiddleware
-from app.routers import auth
+from app.routers import auth, pets
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
@@ -29,6 +29,7 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
+app.include_router(pets.router)
 
 @app.get("/")
 def read_root():
