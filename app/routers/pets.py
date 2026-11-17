@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from app.deps import get_db, get_current_user
@@ -12,12 +12,49 @@ router = APIRouter(
 
 @router.get("/", response_model=list[PetOut])
 def get_pets(
+    search: str | None = Query(default=None, min_length=1),
+    species: str | None = Query(default=None, min_length=1),
+    sort_by: str = Query(default="id"),
+    sort_order: str = Query(default="asc"),
+    limit: int = Query(default=10, ge=1, le=100),
+    offset: int = Query(default=0, ge=0),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
     statement = select(Pet).where(
         Pet.owner_id == current_user.id
     )
+
+    if search:
+        statement = statement.where(
+            Pet.name.ilike(f"%{search}%")
+        )
+    if species:
+        statement = statement.where(
+        Pet.species.ilike(species)
+    )
+
+    if sort_by not in ["id", "name", "weight"]:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Недопустимое поле сортировки",
+        )
+
+    if sort_order not in ["asc", "desc"]:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Недопустимый порядок сортировки",
+        )
+
+    sort_column = getattr(Pet, sort_by)
+
+    if sort_order == "desc":
+        statement = statement.order_by(sort_column.desc())
+    else:
+        statement = statement.order_by(sort_column.asc())
+
+    statement = statement.limit(limit).offset(offset)
+
     pets = db.scalars(statement).all()
     return pets
 

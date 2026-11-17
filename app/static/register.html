@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация — PetPass</title>
+    <link rel="stylesheet" href="/static/css/register.css">
+    <script src="/static/js/register.js" defer></script>
+</head>
+<body>
+    <main class="registration-page">
+
+        <section class="welcome-panel">
+            <div class="welcome-content">
+                <div class="logo">🐾 PetPass</div>
+
+                <h1>ДОБРО<br>ПОЖАЛОВАТЬ!</h1>
+
+                <p>
+                    Зарегистрируйтесь,<br>
+                    чтобы получить полный доступ
+                </p>
+            </div>
+
+            <a class="back-link" href="/login.html">
+                &lt; Вернуться ко входу
+            </a>
+        </section>
+
+        <section class="form-panel">
+            <div class="form-container">
+                <header class="form-header">
+                    <h2>Регистрация</h2>
+                    <p>
+                        Уже есть аккаунт?
+                        <a href="/login.html">Войдите</a>
+                    </p>
+                </header>
+
+                <form id="register-form">
+
+                    <label for="full-name">ФИО*</label>
+                    <input
+                        type="text"
+                        id="full-name"
+                        placeholder="Фамилия Имя Отчество"
+                        autocomplete="name"
+                        required
+                    >
+
+                    <label for="phone">Номер телефона*</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="+7 999 123-45-67"
+                        autocomplete="tel"
+                        required
+                        minlength="5"
+                        maxlength="20"
+                    >
+
+                    <label for="email">Email*</label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Почта"
+                        autocomplete="email"
+                        required
+                    >
+
+                    <label for="username">Логин*</label>
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Логин"
+                        autocomplete="username"
+                        minlength="3"
+                        maxlength="50"
+                        required
+                    >
+
+                    <label for="password">Пароль*</label>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Не менее 8 символов"
+                        autocomplete="new-password"
+                        minlength="8"
+                        maxlength="128"
+                        required
+                    >
+
+                    <label for="password-confirm">Подтверждение пароля*</label>
+                    <input
+                        type="password"
+                        id="password-confirm"
+                        placeholder="Повторите пароль"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <label class="agreement">
+                        <input type="checkbox" id="agreement" required>
+                        <span>Я соглашаюсь с условиями пользования платформой</span>
+                    </label>
+
+                    <p id="register-message" class="message" role="alert"></p>
+
+                    <button type="submit" id="register-button">
+                        Зарегистрироваться
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>

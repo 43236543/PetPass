@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetPass — Главная</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/main.js" defer></script>
+</head>
+<body>
+
+    <header class="topbar">
+        <a href="/main.html" class="brand">
+            <span>🐾</span> PetPass
+        </a>
+
+        <nav class="navigation">
+            <a href="#home" class="nav-link active">Главная</a>
+            <a href="#pets-section" class="nav-link">Мои питомцы</a>
+            <a href="#records-section" class="nav-link">Записи</a>
+            <a href="#history-section" class="nav-link">История</a>
+        </nav>
+
+        <button type="button" class="notification-button" aria-label="Уведомления">
+            ♧
+        </button>
+
+        <div class="profile">
+            <div class="profile-avatar">🐶</div>
+            <div class="profile-info">
+                <strong id="profile-name">Пользователь</strong>
+                <span id="profile-details">Владелец питомцев</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content" id="home">
+
+        <section class="reminder-section">
+            <div class="section-heading">
+                <h2>Напоминание!</h2>
+            </div>
+
+            <div id="reminder-content">
+                <p id="reminder-title">Здесь появятся ближайшие напоминания</p>
+                <p id="reminder-details">
+                    Не пропускайте важные процедуры для ваших питомцев
+                </p>
+            </div>
+        </section>
+
+        <section class="content-card" id="pets-section">
+            <div class="card-heading">
+                <div>
+                    <h2>Мои питомцы</h2>
+                    <p>Карточки ваших животных и их текущий статус</p>
+                </div>
+
+                <a href="#add-pet-section" class="primary-button">
+                    + Добавить
+                </a>
+            </div>
+
+            <div id="pets-list" class="pets-list">
+                <p class="empty-message">Загрузка питомцев...</p>
+            </div>
+        </section>
+
+        <section class="content-card" id="add-pet-section">
+            <div class="card-heading">
+                <div>
+                    <h2>Добавить питомца</h2>
+                    <p>Заполните информацию о вашем животном</p>
+                </div>
+            </div>
+
+            <form id="pet-form" class="form-grid">
+
+                <div class="form-group">
+                    <label for="pet-name">Имя*</label>
+                    <input
+                        type="text"
+                        id="pet-name"
+                        placeholder="Введите имя вашего питомца"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="pet-species">Вид*</label>
+                    <input
+                        type="text"
+                        id="pet-species"
+                        placeholder="Например: Кот/Кошка"
+                        maxlength="50"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="pet-breed">Порода</label>
+                    <input
+                        type="text"
+                        id="pet-breed"
+                        placeholder="Например: Дворняжка"
+                        maxlength="100"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="pet-birth-date">Дата рождения</label>
+                    <input type="date" id="pet-birth-date">
+                </div>
+
+                <div class="form-group">
+                    <label for="pet-weight">Вес (кг)</label>
+                    <input
+                        type="number"
+                        id="pet-weight"
+                        placeholder="Например: 5.5"
+                        min="0.1"
+                        step="0.1"
+                    >
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="pet-active" checked>
+                        Питомец активен
+                    </label>
+                </div>
+
+                <p id="pet-message" class="form-message"></p>
+
+                <button type="submit" class="primary-button full-width">
+                    + Зарегистрировать питомца
+                </button>
+            </form>
+        </section>
+
+        <section class="content-card" id="records-section">
+            <div class="card-heading">
+                <div>
+                    <h2>Новая запись</h2>
+                    <p>Запланировать прививку или визит</p>
+                </div>
+            </div>
+
+            <form id="record-form">
+
+                <div class="form-group">
+                    <label for="record-pet">Питомец*</label>
+                    <select id="record-pet" required>
+                        <option value="">Сначала добавьте питомца</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="record-type">Тип процедуры*</label>
+                    <select id="record-type" required>
+                        <option value="">Выберите тип процедуры</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="record-title">Название записи*</label>
+                    <input
+                        type="text"
+                        id="record-title"
+                        placeholder="Например: Плановая вакцинация"
+                        maxlength="150"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="record-date">Дата*</label>
+                    <input type="date" id="record-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="record-notes">Описание / Клиника</label>
+                    <textarea
+                        id="record-notes"
+                        rows="3"
+                        placeholder="Дополнительная информация"
+                    ></textarea>
+                </div>
+
+                <p id="record-message" class="form-message"></p>
+
+                <button type="submit" class="primary-button full-width">
+                    Сохранить запись
+                </button>
+            </form>
+        </section>
+
+        <section class="content-card" id="history-section">
+            <div class="card-heading">
+                <div>
+                    <h2>История</h2>
+                    <p>Все процедуры и визиты ваших питомцев</p>
+                </div>
+            </div>
+
+            <div id="history-list" class="history-list">
+                <p class="empty-message">
+                    Здесь будет отображаться история ветеринарных записей
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 PetPass. Учёт домашних питомцев и ветеринарных записей.</p>
+
+        <div class="footer-links">
+            <a href="#">Помощь</a>
+            <a href="#">Конфиденциальность</a>
+            <button type="button" id="logout-button">Выход</button>
+        </div>
+    </footer>
+
+</body>
+</html>

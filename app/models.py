@@ -21,8 +21,25 @@ class User(Base):
     middle_name: Mapped[str | None] = mapped_column(String(100), nullable=True)
 
     username: Mapped[str] = mapped_column(
-        String(50), unique=True, nullable=False, index=True
+        String(50),
+        unique=True,
+        nullable=False,
+        index=True
     )
+
+    phone: Mapped[str | None] = mapped_column(
+        String(20),
+        unique=True,
+        nullable=True
+    )
+
+    email: Mapped[str | None] = mapped_column(
+        String(254),
+        unique=True,
+        nullable=True
+    )
+
+
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
 
     pets: Mapped[list["Pet"]] = relationship(back_populates="owner")
