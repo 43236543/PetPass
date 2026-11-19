@@ -103,10 +103,6 @@ body {
     accent-color: #91a8ff;
 }
 
-.forgot-password {
-    cursor: default;
-}
-
 #login-button {
     width: 100%;
     min-height: 70px;
@@ -154,6 +150,47 @@ body {
 .register-link a:hover {
     text-decoration: underline;
 }
+
+
+.forgot-password {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    color: #8299ff;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.forgot-password:hover {
+    color: #586b9c;
+    text-decoration: underline;
+}
+
+.forgot-password:focus-visible {
+    outline: 2px solid #8299ff;
+    outline-offset: 4px;
+    border-radius: 3px;
+}
+
+.message.info {
+    color: #586b9c;
+    background: #eef0ff;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-top: 12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+
 
 @media (max-width: 600px) {
     .login-page {

@@ -74,11 +74,26 @@ a {
 }
 
 .notification-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
     border: none;
+    border-radius: 50%;
     background: transparent;
-    color: #53628f;
-    font-size: 25px;
+    color: #586b9c;
     cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.notification-button:hover {
+    background: #eef0ff;
+    color: #8299ff;
+}
+
+.notification-icon {
+    display: block;
 }
 
 .profile {

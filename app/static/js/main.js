@@ -113,6 +113,43 @@ async function loadPets() {
         container.textContent = error.message;
     }
 }
+function getPetIcon(species) {
+    const value = (species || "").trim().toLowerCase();
+
+    if (value.includes("ко") || value.includes("кот")) {
+        return "🐱";
+    }
+
+    if (value.includes("соб") || value.includes("пёс") || value.includes("пес")) {
+        return "🐶";
+    }
+
+    if (value.includes("попуг") || value.includes("птиц")) {
+        return "🦜";
+    }
+
+    if (value.includes("хомяк")) {
+        return "🐹";
+    }
+
+    if (value.includes("крол")) {
+        return "🐰";
+    }
+
+    if (value.includes("черепах")) {
+        return "🐢";
+    }
+
+    if (value.includes("рыб")) {
+        return "🐠";
+    }
+
+    if (value.includes("змея")) {
+        return "🐍";
+    }
+    
+    return "🐾";
+}
 
 function createPetCard(pet) {
     const card = createElement("article", "pet-card");
@@ -122,7 +159,7 @@ function createPetCard(pet) {
     const avatar = createElement(
         "div",
         "pet-avatar",
-        pet.species.toLowerCase().includes("кош") ? "🐱" : "🐶"
+        getPetIcon(pet.species)
     );
 
     const description = createElement("div", "pet-description");
@@ -353,6 +390,26 @@ document.getElementById("record-form").addEventListener(
     }
 );
 
+function getRecordStatus(record) {
+    if (record.completed) {
+        return "Выполнено";
+    }
+
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+
+    const today = `${year}-${month}-${day}`;
+
+    if (record.record_date < today) {
+        return "Дата прошла — отметьте результат";
+    }
+
+    return "Запланировано";
+}
+
 async function loadHistory(selectedPetId = null) {
     const container = document.getElementById("history-list");
 
@@ -434,7 +491,7 @@ async function loadHistory(selectedPetId = null) {
                 createElement(
                     "p",
                     "",
-                    record.completed ? "Выполнено" : "Не выполнено"
+                    `Статус: ${getRecordStatus(record)}`
                 )
             );
 
@@ -510,6 +567,21 @@ async function initApp() {
     } catch (error) {
         console.error("Ошибка запуска PetPass:", error);
     }
+}
+
+const notificationButton = document.getElementById("notification-button");
+
+if (notificationButton) {
+    notificationButton.addEventListener("click", () => {
+        const reminderSection = document.getElementById("reminder-section");
+
+        if (reminderSection) {
+            reminderSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    });
 }
 
 initApp();

@@ -63,7 +63,8 @@ class Pet(Base):
 
     owner: Mapped["User"] = relationship(back_populates="pets")
     vet_records: Mapped[list["VetRecord"]] = relationship(
-        back_populates="pet"
+    back_populates="pet",
+    cascade="all, delete-orphan"
     )
 
 class RecordType(Base):
